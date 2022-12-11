@@ -19,7 +19,7 @@ migratedown: # downward migration from the database
 	migrate -path db/migration -database "postgresql://root:secret@localhost:5432/simple_bank?sslmode=disable" -verbose down
 
 sqlc: # generates fully type-safe code from SQL queries
-	sqlc generate
+	docker run --rm -v $(CURDIR):/docs -w /docs kjconroy/sqlc generate
 
 test:
 	go test -v -cover ./...
